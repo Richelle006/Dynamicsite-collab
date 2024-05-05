@@ -18,7 +18,12 @@
                 <br>
                 <button type="submit">Submit</button>
             </form>
-            <p><?php echo htmlspecialchars($message); ?></p>
+            <?php
+// Check if there is a message to display
+if (!empty($message)) {
+    echo '<p>' . htmlspecialchars($message) . '</p>';
+}
+?>
         </div>
     </div>
 </body>
