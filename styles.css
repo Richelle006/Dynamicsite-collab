@@ -942,3 +942,10 @@ body {
     margin-top: 15px;
 }
 
+.username {
+    font-size: 0.9rem; /* Slightly smaller font size */
+    font-weight: bold;
+    color: #555; /* Adjust color as needed */
+    margin-right: 10px; /* Add space between username and logout button */
+    display: inline-block;
+}

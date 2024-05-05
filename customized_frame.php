@@ -1,46 +1,45 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Homepage</title>
-        <link rel="stylesheet" href="styles.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
+    <header>
+        <div class="header-content">
+            <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
+        </div>
+        <nav id="navbar">
+            <ul>
+                <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
+                <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
+                <li class="dropdown">
+                    <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
+                    <div class="dropdown-content">
+                        <a href="photo_studio.php">Photo Studio</a>
+                        <a href="customized_frame.php">Customized Frame</a>
+                        <a href="events_workshops.php">Events & Workshops</a>
+                    </div>
+                </li>
+                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
+                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
-        <header>
-            <div class="header-content">
-                <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
-             </div>
-             
-            <nav id="navbar">
-                <ul>
-                    <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
-                    <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
-                    <li class="dropdown">
-                        <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
-                        <div class="dropdown-content">
-                            <a href="photo_studio.php">Photo Studio</a>
-                            <a href="customized_frame.php">Customized Frame</a>
-                            <a href="events_workshops.php">Events & Workshops</a>
-                        </div>
-                    </li>
-    
-                    <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                    <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
-             
-                    <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="profile.php"><?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
-                    <?php else: ?>
-                        <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>
-                    <?php endif; ?>
-             
-                  </ul>
-            </nav>
-        </header>
-
+                <?php else: ?>
+                    <li><a href="login.php">Login</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </header>
+    
 
 
   <!--  CUSTOMIZED FRAME PAGE -->
