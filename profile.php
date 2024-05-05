@@ -1,91 +1,93 @@
 <?php
 session_start();
+
+// Redirect to login page if username is not set
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Database connection credentials
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "UserDB";
-echo "Session data: ";
-print_r($_SESSION);
-// Check if user is logged in
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php'); // Redirect to login page if not logged in
-    exit();
-}
 
-// Database connection
+// Establish the database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check if the connection was successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve user's bookings
+// Retrieve the username from the session
 $username = $_SESSION['username'];
-$sql = "SELECT * FROM Bookings WHERE username = ?";
+
+// Retrieve user's bookings based on username
+$sql = "SELECT b.booking_id, b.booking_date, s.service_name, b.description
+        FROM Bookings b
+        JOIN Services s ON b.service_id = s.service_id
+        JOIN Users u ON b.user_id = u.user_id
+        WHERE u.username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $username);
+$stmt->bind_param('s', $username);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Close statement
+// Close the statement
 $stmt->close();
 
-// Close connection
-$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<header>
-        <div class="header-content">
-            <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
-        </div>
-        <nav id="navbar">
-            <ul>
-                <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
-                <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
-                <li class="dropdown">
-                    <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
-                    <div class="dropdown-content">
-                        <a href="photo_studio.php">Photo Studio</a>
-                        <a href="customized_frame.php">Customized Frame</a>
-                        <a href="events_workshops.php">Events & Workshops</a>
-                    </div>
-                </li>
-                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
-                </ul>
-        </nav>
+    <header>
+        <!-- Add your header content here -->
     </header>
+
     <div class="profile-page">
         <h2>User Profile</h2>
+        <h3>My Bookings</h3>
         <table>
             <tr>
                 <th>Booking ID</th>
                 <th>Booking Date</th>
-                <th>Service</th>
+                <th>Service Name</th>
                 <th>Description</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
             <tr>
-                <td><?php echo $row['booking_id']; ?></td>
-                <td><?php echo $row['booking_date']; ?></td>
-                <td><?php echo $row['service_id']; ?></td>
-                <td><?php echo $row['description']; ?></td>
+                <td><?php echo htmlspecialchars($row['booking_id']); ?></td>
+                <td><?php echo htmlspecialchars($row['booking_date']); ?></td>
+                <td><?php echo htmlspecialchars($row['service_name']); ?></td>
+                <td><?php echo htmlspecialchars($row['description']); ?></td>
                 <td>
-                    <a href="edit_booking.php?id=<?php echo $row['booking_id']; ?>">Edit</a>
-                    <a href="delete_booking.php?id=<?php echo $row['booking_id']; ?>">Delete</a>
+                    <a href="edit_booking.php?id=<?php echo urlencode($row['booking_id']); ?>">Edit</a>
+                    <a href="delete_booking.php?id=<?php echo urlencode($row['booking_id']); ?>">Delete</a>
                 </td>
             </tr>
             <?php endwhile; ?>
         </table>
     </div>
+
+    <footer>
+        <!-- Add your footer content here -->
+    </footer>
 </body>
+
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>
