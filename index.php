@@ -37,7 +37,7 @@ if (!isset($_SESSION['username'])) {
 
                 <?php 
                     if (isset($_SESSION['user_id'])) {
-                       // $username = htmlspecialchars($_SESSION['username']);
+                       $username = htmlspecialchars($_SESSION['username']);
                         echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
                         echo "<li><a href='logout.php'>Logout</a></li>";
                     }
