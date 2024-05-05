@@ -34,67 +34,65 @@ session_start();
                     <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="login.php">Login</a></li>
+                  <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
     </header>
     
     
-        <!-- "BOOKING" SECTION -->
-        <section id="booking-section">
-          <div class="booking-container">
-            <!-- Booking Form -->
-            <div class="booking-form">
-              <h3>Book Your Session</h3>
-              <form id="bookingForm">
-                <label for="booking-date">Choose a Date:</label>
-                <input type="date" id="booking-date" name="booking-date">
-                <br>
-                <label for="service-avail">Service to Avail:</label>
-                <select id="service-avail" name="service-avail">
-                  <option value="">Select a Service</option>
-                  <option value="photo-studio">Photo Studio</option>
-                  <option value="event">Event</option>
-                  <option value="workshop">Workshop</option>
-                </select>
-                <br>
-                <label for="event-description">Event Description:</label>
-                <input type="text" id="event-description" name="event-description" placeholder="e.g., Wedding, Birthday">
-                <br>
-                <button type="button" id="book-now-button">Book Now</button>
-              </form>
-            </div>
-          
-              <!-- Booking Details -->
-              <div class="booking-details">
-                <h2>BOOK NOW!</h2>
-                <p>Don’t miss out on the moments that matter. Frame your memories in style with our expertly crafted photo sessions. 
-                   Ready to create timeless memories? Book your session with <b>Framed Memories Studio! </b></p>
-              </div>
-              
-              <!-- Slideshow Container -->
-              <div class="slideshow-container">
-                <div class="mySlides fade">
-                  <img src="resources/20.jpg" alt="Image 1">
-                </div>
-                <div class="mySlides fade">
-                  <img src="resources/19.jpg" alt="Image 2">
-                </div>
-                <div class="mySlides fade">
-                  <img src="resources/5.jpg" alt="Image 3">
-                </div>
-                <div class="mySlides fade">
-                  <img src="resources/6.jpg" alt="Image 4">
-                </div>
-                <div class="mySlides fade">
-                  <img src="resources/4.jpg" alt="Image 5">
-                </div>
-               </div> 
-              
-            </div>
-          </section>
-          
+     <!-- "BOOKING" SECTION -->
+<section id="booking-section">
+  <div class="booking-container">
+    <!-- Booking Form -->
+    <div class="booking-form">
+      <h3>Book Your Session</h3>
+      <form id="bookingForm">
+        <label for="booking-date">Choose a Date:</label>
+        <input type="date" id="booking-date" name="booking-date" required>
+        <br>
+        <label for="service-avail">Service to Avail:</label>
+        <select id="service-avail" name="service-avail" required>
+          <option value="">Select a Service</option>
+          <option value="photo-studio">Photo Studio</option>
+          <option value="event">Event</option>
+          <option value="workshop">Workshop</option>
+        </select>
+        <br>
+        <label for="event-description">Event Description:</label>
+        <input type="text" id="event-description" name="event-description" placeholder="e.g., Wedding, Birthday" required>
+        <br>
+        <!-- Keep the button type as 'button' for JavaScript handling -->
+        <button type="button" id="book-now-button">Book Now</button>
+      </form>
+    </div>
+
+    <!-- Booking Details -->
+    <div class="booking-details">
+      <h2>BOOK NOW!</h2>
+      <p>Don’t miss out on the moments that matter. Frame your memories in style with our expertly crafted photo sessions. Ready to create timeless memories? Book your session with <b>Framed Memories Studio!</b></p>
+    </div>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <img src="resources/20.jpg" alt="Image 1">
+      </div>
+      <div class="mySlides fade">
+        <img src="resources/19.jpg" alt="Image 2">
+      </div>
+      <div class="mySlides fade">
+        <img src="resources/5.jpg" alt="Image 3">
+      </div>
+      <div class="mySlides fade">
+        <img src="resources/6.jpg" alt="Image 4">
+      </div>
+      <div class="mySlides fade">
+        <img src="resources/4.jpg" alt="Image 5">
+      </div>
+    </div>
+  </div>
+</section>
         
         
         
