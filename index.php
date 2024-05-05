@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to access session variables
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ session_start(); // Start the session to access session variables
 <body>
     <header>
         <div class="header-content">
-            <img src="resources/logo.png" alt="Site Logo" class="site-logo">
+            <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
         </div>
         <nav id="navbar">
             <ul>
@@ -31,7 +31,7 @@ session_start(); // Start the session to access session variables
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="profile.php"><?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
                     <li><a href="login.php">Login</a></li>
@@ -39,6 +39,7 @@ session_start(); // Start the session to access session variables
             </ul>
         </nav>
     </header>
+    
     
     
 
