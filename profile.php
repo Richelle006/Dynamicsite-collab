@@ -1,10 +1,5 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "UserDB";
-
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php'); // Redirect to login page if not logged in
@@ -12,6 +7,10 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "UserDB";
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
