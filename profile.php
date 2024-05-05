@@ -34,7 +34,6 @@ $result = $stmt->get_result();
 // Close statement
 
 $conn->close();
-?>
 </head>
 <body>
 <header>
