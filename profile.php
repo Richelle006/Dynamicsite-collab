@@ -1,11 +1,16 @@
 <?php
 session_start();
 
-/*Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php'); // Redirect to login page if not logged in
+// Check if `user_id` is set before using it
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    // Handle the case where `user_id` is not set
+    // Redirect to login.php or show an error message
+    header('Location: login.php');
     exit();
-}*/
+}
+
 
 // Database connection
 $servername = "localhost";
