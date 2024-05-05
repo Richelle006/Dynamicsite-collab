@@ -1,5 +1,13 @@
-
 <?php
+// Debugging: Output contents of $_POST superglobal
+var_dump($_POST);
+
+// Check if all required fields are present in $_POST
+if (!isset($_POST['booking-date']) || !isset($_POST['service-avail']) || !isset($_POST['event-description'])) {
+    echo "All fields are required!";
+    exit;
+}
+
 // Database connection credentials
 $servername = "localhost";
 $username = "root";
