@@ -1,13 +1,5 @@
+
 <?php
-// Debugging: Output contents of $_POST superglobal
-var_dump($_POST);
-
-// Check if all required fields are present in $_POST
-if (!isset($_POST['booking-date']) || !isset($_POST['service-avail']) || !isset($_POST['event-description'])) {
-    echo "All fields are required!";
-    exit;
-}
-
 // Database connection credentials
 $servername = "localhost";
 $username = "root";
@@ -30,13 +22,6 @@ $description = $_POST['event-description'];
 // Validate inputs
 if (empty($booking_date) || empty($service_type) || empty($description)) {
     echo "All fields are required!";
-    exit;
-}
-
-// Validate service type
-$valid_service_types = ['photo-studio', 'event', 'workshop'];
-if (!in_array($service_type, $valid_service_types)) {
-    echo "Invalid service type.";
     exit;
 }
 
