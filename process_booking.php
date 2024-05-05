@@ -32,7 +32,7 @@ switch ($service_type) {
         $column = 'photo';
         break;
     case 'event':
-        $table = 'event';
+        $table = 'events';
         $column = 'event';
         break;
     case 'workshop':
