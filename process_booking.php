@@ -33,6 +33,13 @@ if (empty($booking_date) || empty($service_type) || empty($description)) {
     exit;
 }
 
+// Validate service type
+$valid_service_types = ['photo-studio', 'event', 'workshop'];
+if (!in_array($service_type, $valid_service_types)) {
+    echo "Invalid service type.";
+    exit;
+}
+
 // Map service type to appropriate table and column
 switch ($service_type) {
     case 'photo-studio':
