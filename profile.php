@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 }
 
 // Retrieve the username from the session
-$username = $_SESSION['username'];
+$user = $_SESSION['username'];
 
 // Retrieve user's bookings based on username
 $sql = "SELECT b.booking_id, b.booking_date, s.service_name, b.description
@@ -31,13 +31,19 @@ $sql = "SELECT b.booking_id, b.booking_date, s.service_name, b.description
         JOIN Users u ON b.user_id = u.user_id
         WHERE u.username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $username);
+$stmt->bind_param('s', $user);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Debug: Check if any rows are returned
+if ($result->num_rows > 0) {
+    echo "Bookings found for user.";
+} else {
+    echo "No bookings found for user.";
+}
+
 // Close the statement
 $stmt->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +63,7 @@ $stmt->close();
         <nav id="navbar">
             <ul>
                 <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
-                <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
+                <li><a href="about.php"><img src="resources/about_us.png" alt="" class="menu-icon">About Us</a></li>
                 <li class="dropdown">
                     <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
                     <div class="dropdown-content">
@@ -67,18 +73,16 @@ $stmt->close();
                     </div>
                 </li>
                 <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
+                <li><a href="contact.php"><img src="resources/contact_us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php 
                     if (isset($_SESSION['username'])) {
                         $username = htmlspecialchars($_SESSION['username']);
                         echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
                     } else {
-                        // If the user is not logged in, show a login link instead
                         echo "<li><a href='login.php' class='username'>Login</a></li>";
                     }
                     
-                    // Display the "Logout" link if the user is logged in
                     if (isset($_SESSION['username'])) {
                         echo "<li><a href='logout.php'>Logout</a></li>";
                     }
