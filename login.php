@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($is_new_user) {
         // Register a new user by hashing the password
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $conn->prepare("INSERT INTO userinfo (username, password) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (username,password) VALUES (?, ?)");
         $stmt->bind_param('ss', $username, $password_hash);
 
         if ($stmt->execute()) {
