@@ -30,12 +30,22 @@ session_start();
                 <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
-                <?php if (isset($_SESSION['username'])): ?>
-                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
-                    <li><a href="logout.php">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>    
-                <?php endif; ?>
+                <?php 
+                    if (isset($_SESSION['username'])) {
+                        $username = htmlspecialchars($_SESSION['username']);
+                        echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
+                    } else {
+                        // If the user is not logged in, show a login link instead
+                        echo "<li><a href='login.php' class='username'>Login</a></li>";
+                    }
+                    
+                    // Display the "Logout" link if the user is logged in
+                    if (isset($_SESSION['username'])) {
+                        echo "<li><a href='logout.php'>Logout</a></li>";
+                    }
+                
+                ?>
+
             </ul>
         </nav>
     </header>
