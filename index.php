@@ -28,7 +28,14 @@ if (!isset($_SESSION['username'])) {
                     <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
                     <div class="dropdown-content">
                         <a href="photo_studio.php">Photo Studio</a>
-                        <?p
+                        <a href="customized_frame.php">Customized Frame</a>
+                        <a href="events_workshops.php">Events & Workshops</a>
+                    </div>
+                </li>
+                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
+                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
+
+                <?php 
                     if (isset($_SESSION['username'])) {
                         $username = htmlspecialchars($_SESSION['username']);
                         echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
