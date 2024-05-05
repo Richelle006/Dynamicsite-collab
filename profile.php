@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Database connection and retrieval of booking data for the logged-in user
-include 'db_connection.php'; // Include database connection script
+include 'process_booking.php'; // Include database connection script
 $username = $_SESSION['username']; // Assuming you have a user ID in your database
 // Query to retrieve booking data for the user
 // Adjust this query according to your database schema
