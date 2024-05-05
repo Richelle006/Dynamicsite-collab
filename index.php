@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php 
-                    if (isset($_SESSION['user_id'])) {
+                    if (isset($_SESSION['username'])) {
                        $username = htmlspecialchars($_SESSION['username']);
                         echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
                         echo "<li><a href='logout.php'>Logout</a></li>";
