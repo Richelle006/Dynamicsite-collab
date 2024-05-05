@@ -1,5 +1,10 @@
 <?php
 session_start();
+// Check if the user is not logged in, then redirect them to the login page
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,20 +28,7 @@ session_start();
                     <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
                     <div class="dropdown-content">
                         <a href="photo_studio.php">Photo Studio</a>
-                        <a href="customized_frame.php">Customized Frame</a>
-                        <a href="events_workshops.php">Events & Workshops</a>
-                    </div>
-                </li>
-                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
-
-                <?php if (isset($_SESSION['username'])): ?>
-                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
-                    <li><a href="logout.php">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>    
-                <?php endif; ?>
-                <?php 
+                        <?p
                     if (isset($_SESSION['username'])) {
                         $username = htmlspecialchars($_SESSION['username']);
                         echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
