@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 }
 
 // Retrieve the username from the session
-$username = $_SESSION['username'];
+$user = $_SESSION['username'];
 
 // Retrieve user's bookings based on username
 $sql = "SELECT b.booking_id, b.booking_date, s.service_name, b.description
@@ -31,7 +31,7 @@ $sql = "SELECT b.booking_id, b.booking_date, s.service_name, b.description
         JOIN Users u ON b.user_id = u.user_id
         WHERE u.username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $username);
+$stmt->bind_param('s', $user);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -62,27 +62,33 @@ $stmt->close();
         </div>
         <nav id="navbar">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">About Us</a></li>
+                <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
+                <li><a href="about.php"><img src="resources/about_us.png" alt="" class="menu-icon">About Us</a></li>
                 <li class="dropdown">
-                    <a href="services.php">Services</a>
+                    <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
                     <div class="dropdown-content">
                         <a href="photo_studio.php">Photo Studio</a>
                         <a href="customized_frame.php">Customized Frame</a>
                         <a href="events_workshops.php">Events & Workshops</a>
                     </div>
                 </li>
-                <li><a href="booking.php">Booking</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
+                <li><a href="contact.php"><img src="resources/contact_us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php 
                     if (isset($_SESSION['username'])) {
-                        echo "<li><a href='profile.php' class='username'>My Profile: " . htmlspecialchars($_SESSION['username']) . "</a></li>";
-                        echo "<li><a href='logout.php'>Logout</a></li>";
+                        $username = htmlspecialchars($_SESSION['username']);
+                        echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
                     } else {
                         echo "<li><a href='login.php' class='username'>Login</a></li>";
                     }
+                    
+                    if (isset($_SESSION['username'])) {
+                        echo "<li><a href='logout.php'>Logout</a></li>";
+                    }
+                
                 ?>
+
             </ul>
         </nav>
     </header>

@@ -21,10 +21,10 @@ $description = $_POST['event-description'];
 // Validate inputs
 if (empty($booking_date) || empty($service_type) || empty($description)) {
     echo "All fields are required!";
-    exit();
+    exit;
 }
 
-// Start session and retrieve user_id
+// Get user_id from the session (assuming you have it stored there)
 session_start();
 $user_id = $_SESSION['user_id'];
 
@@ -35,27 +35,17 @@ function getServiceId($conn, $service_type) {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $stmt->close();
-    return $row['service_id'] ?? null;
-}
-
-// Get service_id
-$service_id = getServiceId($conn, $service_type);
-
-// Debugging
-echo "Inserting booking with user_id: $user_id, service_id: $service_id, booking_date: $booking_date, description: $description";
-
-// Check if service_id is valid
-if ($service_id === null) {
-    echo "Invalid service type selected.";
-    exit();
+    return $row['service_id'];
 }
 
 // Insert into the Bookings table using a prepared statement
 $stmt = $conn->prepare("INSERT INTO Bookings (user_id, service_id, booking_date, description) VALUES (?, ?, ?, ?)");
-$stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
 
-// Execute and provide feedback
+// Debugging: Print values to be inserted
+echo "Inserting booking with user_id: $user_id, service_id: $service_id, booking_date: $booking_date, description: $description";
+
+// Bind parameters and execute statement
+$stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
 if ($stmt->execute()) {
     echo "Booking successfully created!";
 } else {
