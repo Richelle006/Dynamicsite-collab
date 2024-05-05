@@ -9,12 +9,12 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
 
 // Database connection credentials
 $servername = "localhost";
-$username = "root";
+$user_id = "root";
 $password = "";
 $dbname = "UserDB";
 
 // Establish the database connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $user_id, $password, $dbname);
 
 // Check if the connection was successful
 if ($conn->connect_error) {
