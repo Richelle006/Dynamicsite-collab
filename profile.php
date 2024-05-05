@@ -1,22 +1,17 @@
 <?php
 session_start();
-
-// Check if `user_id` is set before using it
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-} else {
-    // Handle the case where `user_id` is not set
-    // Redirect to login.php or show an error message
-    header('Location: login.php');
-    exit();
-}
-
-
-// Database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "UserDB";
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); // Redirect to login page if not logged in
+    exit();
+}
+
+// Database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -39,7 +34,6 @@ $result = $stmt->get_result();
 // Close statement
 
 $conn->close();
-?>
 </head>
 <body>
 <header>
