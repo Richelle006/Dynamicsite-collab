@@ -9,7 +9,7 @@ body {
 
 
 header {
-    background-color: #000000;
+    background-color: #c9c8c873;
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -37,7 +37,7 @@ nav#navbar ul li {
 
 nav#navbar ul li a {
     text-decoration: none;
-    color: #fff;
+    color: #161616;
     font-size: 20px;
     padding: 5px 10px;
 }
