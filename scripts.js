@@ -66,19 +66,39 @@ function showSlides() {
 
 
 //Booking Section BOOK NOW
-document.getElementById('book-now-button').addEventListener('click', function() {
+document.getElementById('book-now-button').addEventListener('click', function () {
+    // Get form values
     var date = document.getElementById('booking-date').value;
     var service = document.getElementById('service-avail').value;
     var description = document.getElementById('event-description').value;
-    var form = document.getElementById('bookingForm');
-  
+
+    // Basic validation
     if (!date || service === "" || !description) {
-      alert('Please fill in all fields.');
-    } else {
-      alert('Inquiry Submitted. We will get back to you soon!');
-      form.reset(); // Resets the form after successful submission
+        alert('Please fill in all fields.');
+        return;
     }
-  });
+
+    // Create a FormData object for AJAX request
+    var formData = new FormData();
+    formData.append('booking-date', date);
+    formData.append('service-avail', service);
+    formData.append('event-description', description);
+
+    // Send AJAX request using Fetch API
+    fetch('process_booking.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data); // Display the response message
+        document.getElementById('bookingForm').reset(); // Reset the form
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Booking failed. Please try again.');
+    });
+});
 
 
 
