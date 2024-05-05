@@ -38,14 +38,14 @@ function getServiceId($conn, $service_type) {
     return $row['service_id'];
 }
 
-// Get service_id based on service_type
-$service_id = getServiceId($conn, $service_type);
-
 // Insert into the Bookings table using a prepared statement
 $stmt = $conn->prepare("INSERT INTO Bookings (user_id, service_id, booking_date, description) VALUES (?, ?, ?, ?)");
-$stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
 
-// Execute and provide feedback
+// Debugging: Print values to be inserted
+echo "Inserting booking with user_id: $user_id, service_id: $service_id, booking_date: $booking_date, description: $description";
+
+// Bind parameters and execute statement
+$stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
 if ($stmt->execute()) {
     echo "Booking successfully created!";
 } else {
