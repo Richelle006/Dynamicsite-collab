@@ -2,8 +2,7 @@
 session_start();
 echo "Session data: ";
 print_r($_SESSION);
-// After successful login:
-$_SESSION['user_id'] = $user_id; // Set user_id session variable
+
 $servername = "localhost";
 $username = "root";
 $password = "";
