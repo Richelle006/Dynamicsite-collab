@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-// Redirect to login page if username is not set
-if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+// Redirect to login page if user_id is not set
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
@@ -21,17 +21,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve the username from the session
-$username = $_SESSION['username'];
+// Retrieve the user_id from the session
+$user_id = $_SESSION['user_id'];
 
-// Retrieve user's bookings based on username
+// Retrieve user's bookings based on user_id
 $sql = "SELECT b.booking_id, b.booking_date, s.service_name, b.description
         FROM Bookings b
         JOIN Services s ON b.service_id = s.service_id
         JOIN Users u ON b.user_id = u.user_id
-        WHERE u.username = ?";
+        WHERE u.user_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $username);
+$stmt->bind_param('s', $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -70,16 +70,16 @@ $stmt->close();
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php 
-                    if (isset($_SESSION['username'])) {
-                        $username = htmlspecialchars($_SESSION['username']);
-                        echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
+                    if (isset($_SESSION['user_id'])) {
+                        $user_id = htmlspecialchars($_SESSION['user_id']);
+                        echo "<li><a href='profile.php' class='user_id'>My Profile: $user_id</a></li>";
                     } else {
                         // If the user is not logged in, show a login link instead
-                        echo "<li><a href='login.php' class='username'>Login</a></li>";
+                        echo "<li><a href='login.php' class='user_id'>Login</a></li>";
                     }
                     
                     // Display the "Logout" link if the user is logged in
-                    if (isset($_SESSION['username'])) {
+                    if (isset($_SESSION['user_id'])) {
                         echo "<li><a href='logout.php'>Logout</a></li>";
                     }
                 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Check if the user is not logged in, then redirect them to the login page
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
@@ -36,16 +36,16 @@ if (!isset($_SESSION['username'])) {
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php 
-                    if (isset($_SESSION['username'])) {
-                        $username = htmlspecialchars($_SESSION['username']);
-                        echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
+                    if (isset($_SESSION['user_id'])) {
+                        $user_id = htmlspecialchars($_SESSION['user_id']);
+                        echo "<li><a href='profile.php' class='user_id'>My Account</a></li>";
                     } else {
                         // If the user is not logged in, show a login link instead
-                        echo "<li><a href='login.php' class='username'>Login</a></li>";
+                        echo "<li><a href='login.php' class='user_id'>Login</a></li>";
                     }
                     
                     // Display the "Logout" link if the user is logged in
-                    if (isset($_SESSION['username'])) {
+                    if (isset($_SESSION['user_id'])) {
                         echo "<li><a href='logout.php'>Logout</a></li>";
                     }
                 
