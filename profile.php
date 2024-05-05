@@ -1,15 +1,19 @@
 <?php
 session_start();
+echo "Session data: ";
+print_r($_SESSION);
+// After successful login:
+$_SESSION['user_id'] = $user_id; // Set user_id session variable
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "UserDB";
 
-// Check if user is logged in
+/* Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php'); // Redirect to login page if not logged in
     exit();
-}
+}*/
 
 // Database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
