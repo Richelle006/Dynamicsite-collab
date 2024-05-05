@@ -1,16 +1,17 @@
 <?php
 session_start();
+
 // Check if user is logged in, redirect to login page if not
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
 }
 
-// Database connection and retrieval of booking data for the logged-in user
-include 'process_booking.php'; // Include database connection script
-$username = $_SESSION['username']; // Assuming you have a user ID in your database
-// Query to retrieve booking data for the user
-// Adjust this query according to your database schema
+// Database connection
+include 'process_booking.php';
+
+// Retrieve booking data for the logged-in user
+$user_id = $_SESSION['user_id']; // Assuming you have a user ID in your database
 $sql = "SELECT * FROM bookings WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $user_id);
@@ -31,20 +32,32 @@ $bookings = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 <body>
     <div class="profile-page">
-        <div class="profile-container">
-            <h2>Welcome, <?php echo $_SESSION['username']; ?></h2>
-            <h3>Your Bookings:</h3>
-            <ul>
+        <h2>Welcome, <?php echo $_SESSION['username']; ?></h2>
+        <h3>Your Bookings:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking Date</th>
+                    <th>Service Type</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php foreach ($bookings as $booking): ?>
-                    <li>
-                        <?php echo $booking['booking_info']; ?>
-                        <!-- Add edit and delete links/buttons here -->
-                        <a href="edit_booking.php?id=<?php echo $booking['id']; ?>">Edit</a>
-                        <a href="delete_booking.php?id=<?php echo $booking['id']; ?>">Delete</a>
-                    </li>
+                    <tr>
+                        <td><?php echo $booking['booking_date']; ?></td>
+                        <td><?php echo $booking['service_type']; ?></td>
+                        <td><?php echo $booking['description']; ?></td>
+                        <td>
+                            <a href="edit_booking.php?id=<?php echo $booking['id']; ?>">Edit</a>
+                            <a href="delete_booking.php?id=<?php echo $booking['id']; ?>">Delete</a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
-            </ul>
-        </div>
+            </tbody>
+        </table>
+        <a href="logout.php">Logout</a>
     </div>
 </body>
 </html>
