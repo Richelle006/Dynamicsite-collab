@@ -33,7 +33,7 @@ $result = $stmt->get_result();
 
 // Close statement
 
-@@ -42,49 +48,52 @@ $conn->close();
+$conn->close();
 </head>
 <body>
 <header>
