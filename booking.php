@@ -56,7 +56,7 @@ session_start();
     <!-- Booking Form -->
     <div class="booking-form">
       <h3>Book Your Session</h3>
-      <form id="bookingForm">
+      <form method="POST" action="process_booking.php" id="bookingForm">
         <label for="booking-date">Choose a Date:</label>
         <input type="date" id="booking-date" name="booking-date" required>
         <br>
