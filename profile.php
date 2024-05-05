@@ -7,7 +7,7 @@ $dbname = "UserDB";
 echo "Session data: ";
 print_r($_SESSION);
 // Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['username'])) {
     header('Location: login.php'); // Redirect to login page if not logged in
     exit();
 }
@@ -19,10 +19,10 @@ if ($conn->connect_error) {
 }
 
 // Retrieve user's bookings
-$user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM Bookings WHERE user_id = ?";
+$username = $_SESSION['username'];
+$sql = "SELECT * FROM Bookings WHERE username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $user_id);
+$stmt->bind_param('i', $username);
 $stmt->execute();
 $result = $stmt->get_result();
 
