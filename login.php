@@ -1,32 +1,32 @@
 <?php
 session_start();
 $message = '';
-$servername = "localhost";  // Usually "localhost" for local development.
-$username = "root";         // The MySQL username.
-$password = "";             // Password for your MySQL database.
-$dbname = "UserDB";         // The database name containing the user info.
+$servername = "localhost";
+$db_username = "root";
+$db_password = "";
+$dbname = "UserDB";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Retrieve and sanitize the username
+    // Retrieve and sanitize the username and password
     $username = $conn->real_escape_string($_POST['username']);
-    $password = $_POST['password'];
+    $password = $_POST['password']; // Raw password, unescaped for password hashing purposes
     $is_new_user = isset($_POST['new_user']) && $_POST['new_user'] == 'on';
 
     if ($is_new_user) {
-        // Register a new user
+        // Register a new user by hashing the password
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $conn->prepare("INSERT INTO userinfo (username, password) VALUES (?, ?)");
         $stmt->bind_param('ss', $username, $password_hash);
 
         if ($stmt->execute()) {
-            $_SESSION['username'] = $username; // Set the session variable
+            $_SESSION['username'] = $username; // Set session variable
             header('Location: index.php');     // Redirect to the homepage
             exit();
         } else {
@@ -43,8 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_result($stored_password);
             $stmt->fetch();
 
+            // Verify the entered password against the stored hash
             if (password_verify($password, $stored_password)) {
-                $_SESSION['username'] = $username; // Set the session variable
+                $_SESSION['username'] = $username; // Set session variable
                 header('Location: index.php');     // Redirect to the homepage
                 exit();
             } else {
