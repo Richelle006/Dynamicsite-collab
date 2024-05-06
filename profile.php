@@ -84,7 +84,7 @@ $conn->close();
 </header>
 
 <div class="profile-page">
-    <h2>User Profile - <?php echo $username; ?></h2>
+    <h2>Good day! <?php echo $username; ?>, These are your bookings.</h2>
     <table>
         <tr>
             <th>Booking ID</th>
