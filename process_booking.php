@@ -34,8 +34,26 @@ function getServiceId($conn, $service_type) {
     $stmt->bind_param('s', $service_type);
     $stmt->execute();
     $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    return $row['service_id'];
+
+    // Check if the query returned any rows
+    if ($result->num_rows > 0) {
+        // Fetch the row
+        $row = $result->fetch_assoc();
+        
+        // Check if 'service_id' is set in the row
+        if (isset($row['service_id'])) {
+            // Return the value of 'service_id'
+            return $row['service_id'];
+        } else {
+            // Handle the case where 'service_id' is not set
+            // For example, log an error message or return a default value
+            return null;
+        }
+    } else {
+        // Handle the case where the query returned no rows
+        // For example, log an error message or return a default value
+        return null;
+    }
 }
 
 // Get service_id based on service_type
