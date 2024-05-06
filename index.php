@@ -11,7 +11,7 @@ session_start();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
+    <header>
         <div class="header-content">
             <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
         </div>
@@ -33,7 +33,7 @@ session_start();
                 <?php if (isset($_SESSION['username'])): ?>
                     <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
-                    <li><a href="profile.php" class="username">My Profile: <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+                    <li><a href="profile.php">My Profile</a></li>
                 <?php else: ?>
                     <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>
                 <?php endif; ?>
