@@ -24,23 +24,6 @@ if (empty($booking_date) || empty($service_type) || empty($description)) {
     exit;
 }
 
-// Map service type to appropriate table and column
-switch ($service_type) {
-    case 'photo-studio':
-        $table = 'photo_studio';
-        $column = 'photo';
-        break;
-    case 'event':
-        $table = 'events';
-        $column = 'event';
-        break;
-    case 'workshop':
-        $table = 'workshop';
-        $column = 'workshop';
-        break;
-    default:
-        echo "Invalid service type.";
-        exit;
 // Get user_id from the session (assuming you have it stored there)
 session_start();
 $user_id = $_SESSION['user_id'];
@@ -55,9 +38,6 @@ function getServiceId($conn, $service_type) {
     return $row['service_id'];
 }
 
-// Insert into the correct table using a prepared statement
-$stmt = $conn->prepare("INSERT INTO $table (booking, $column) VALUES (?, ?)");
-$stmt->bind_param('ss', $booking_date, $description);
 // Get service_id based on service_type
 $service_id = getServiceId($conn, $service_type);
 
