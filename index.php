@@ -31,9 +31,9 @@ session_start();
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><span class="username">Logged in as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="profile.php">My Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
                     <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>
                 <?php endif; ?>
