@@ -31,9 +31,9 @@ session_start();
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="logout.php">Logout</a></li>
                     <li><a href="profile.php" class="username">My Profile: <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
-                <?php else: ?>
+                    <li><a href="logout.php">Logout</a></li>
+                    <?php else: ?>
                     <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>
                 <?php endif; ?>
             </ul>
