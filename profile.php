@@ -31,6 +31,19 @@ if ($stmt->errno) {
 
 $result = $stmt->get_result();
 
+// Retrieve the username of the logged-in user
+$username = '';
+$sql_username = "SELECT username FROM Users WHERE user_id = ?";
+$stmt_username = $conn->prepare($sql_username);
+$stmt_username->bind_param('i', $user_id);
+$stmt_username->execute();
+$result_username = $stmt_username->get_result();
+
+if ($result_username->num_rows > 0) {
+    $row_username = $result_username->fetch_assoc();
+    $username = $row_username['username'];
+}
+
 // Close statement
 $stmt->close();
 
@@ -71,7 +84,7 @@ $conn->close();
 </header>
 
 <div class="profile-page">
-    <h2>User Profile</h2>
+    <h2>User Profile - <?php echo $username; ?></h2>
     <table>
         <tr>
             <th>Booking ID</th>
