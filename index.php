@@ -11,7 +11,7 @@ session_start();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+<header>
         <div class="header-content">
             <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
         </div>
@@ -31,19 +31,16 @@ session_start();
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="profile.php" class="username">My Profile: <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
-                    <?php else: ?>
+                    <li><a href="profile.php" class="username">My Profile: <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+                <?php else: ?>
                     <li><a href="login.php"><img src="resources/login.png" alt="" class="menu-icon">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
     </header>
     
-    
-    
-    
-
     <section id="home" class="main-section">
         <video id="mainVideo" controls autoplay loop muted>
             <source src="resources/main video.mp4" type="video/mp4">
