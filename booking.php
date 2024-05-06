@@ -53,24 +53,19 @@ session_start();
      <!-- "BOOKING" SECTION -->
 <section id="booking-section">
   <div class="booking-container">
-        <!-- Booking Form -->
+    <!-- Booking Form -->
     <div class="booking-form">
       <h3>Book Your Session</h3>
-      <form method="post" action="process_booking.php" id="bookingForm">
+      <form method="POST" action="process_booking.php" id="bookingForm">
         <label for="booking-date">Choose a Date:</label>
         <input type="date" id="booking-date" name="booking-date" required>
         <br>
         <label for="service-avail">Service to Avail:</label>
         <select id="service-avail" name="service-avail" required>
           <option value="">Select a Service</option>
-          <?php
-            // Assuming you have retrieved the list of services from your database
-            // $services should be an array containing the available services
-            // You can loop through the $services array to create option elements for each service
-            foreach ($services as $service) {
-              echo "<option value='" . $service['service_id'] . "'>" . $service['service_name'] . "</option>";
-            }
-          ?>
+          <option value="photo-studio">Photo Studio</option>
+          <option value="event">Event</option>
+          <option value="workshop">Workshop</option>
         </select>
         <br>
         <label for="event-description">Event Description:</label>
