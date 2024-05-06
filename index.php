@@ -31,7 +31,6 @@ session_start();
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li><span class="username">Login as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
                     <li><a href="logout.php">Logout</a></li>
                     <li><a href="profile.php" class="username">My Profile: <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
                 <?php else: ?>
