@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($is_new_user) {
         // Register a new user by hashing the password
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $conn->prepare("INSERT INTO userinfo (username, password) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
         $stmt->bind_param('ss', $username, $password_hash);
 
         if ($stmt->execute()) {
@@ -34,19 +34,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         // Existing user login
-        $stmt = $conn->prepare("SELECT password FROM userinfo WHERE username = ?");
+        $stmt = $conn->prepare("SELECT user_id, password FROM Users WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
-        $stmt->store_result();
+        $result = $stmt->get_result();
 
-        if ($stmt->num_rows == 1) {
-            $stmt->bind_result($stored_password);
-            $stmt->fetch();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $user_id = $row['user_id'];
+            $stored_password = $row['password'];
 
             // Verify the entered password against the stored hash
             if (password_verify($password, $stored_password)) {
                 $_SESSION['username'] = $username; // Set session variable
-                header('Location: index.php');     // Redirect to the homepage
+                $_SESSION['user_id'] = $user_id; // Set session variable
+                header('Location: index.php');    // Redirect to the homepage
                 exit();
             } else {
                 $message = 'Incorrect password.';
@@ -54,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $message = 'User not found.';
         }
-    }
 
     $stmt->close();
     $conn->close();
+    }
 }
 ?>
 

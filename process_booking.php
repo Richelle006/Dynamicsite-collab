@@ -1,4 +1,3 @@
-
 <?php
 // Database connection credentials
 $servername = "localhost";
@@ -16,37 +15,44 @@ if ($conn->connect_error) {
 
 // Retrieve data from the form via POST
 $booking_date = $_POST['booking-date'];
-$service_type = $_POST['service-avail'];
+$service_name = $_POST['service-avail'];
 $description = $_POST['event-description'];
 
 // Validate inputs
-if (empty($booking_date) || empty($service_type) || empty($description)) {
+if (empty($booking_date) || empty($service_name) || empty($description)) {
     echo "All fields are required!";
     exit;
 }
 
-// Map service type to appropriate table and column
-switch ($service_type) {
-    case 'photo-studio':
-        $table = 'photo_studio';
-        $column = 'photo';
-        break;
-    case 'event':
-        $table = 'event';
-        $column = 'event';
-        break;
-    case 'workshop':
-        $table = 'workshop';
-        $column = 'workshop';
-        break;
-    default:
-        echo "Invalid service type.";
-        exit;
+// Get user_id from the session (assuming you have it stored there)
+session_start();
+$user_id = $_SESSION['user_id'];
+
+// Function to get service_id based on service_name
+function getServiceId($conn, $service_name) {
+    $stmt = $conn->prepare("SELECT service_id FROM services WHERE service_name = ?");
+    $stmt->bind_param('s', $service_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if the query returned any rows
+    if ($result->num_rows > 0) {
+        // Fetch the row
+        $row = $result->fetch_assoc();
+
+        // Return the value of 'service_id'
+        return $row['service_id'];
+    } else {
+        return null;
+    }
 }
 
-// Insert into the correct table using a prepared statement
-$stmt = $conn->prepare("INSERT INTO $table (booking, $column) VALUES (?, ?)");
-$stmt->bind_param('ss', $booking_date, $description);
+// Get service_id based on service_name
+$service_id = getServiceId($conn, $service_name); 
+// Insert into the Bookings table using a prepared statement
+$stmt = $conn->prepare("INSERT INTO bookings (user_id, service_id, booking_date, description) VALUES (?, ?, ?, ?)");
+$stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
+
 
 // Execute and provide feedback
 if ($stmt->execute()) {
