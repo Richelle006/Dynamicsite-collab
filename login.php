@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Verify the entered password against the stored hash
             if (password_verify($password, $stored_password)) {
+                $_SESSION['username'] = $username; // Set session variable
                 $_SESSION['user_id'] = $user_id; // Set session variable
                 header('Location: index.php');    // Redirect to the homepage
                 exit();
@@ -55,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $message = 'User not found.';
         }
-    }
 
     $stmt->close();
     $conn->close();
+    }
 }
 ?>
 
