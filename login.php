@@ -2,13 +2,13 @@
 session_start();
 $message = '';
 $servername = "localhost";
-$db_username = "root";
-$db_password = "";
+$username = "root";
+$password = "";
 $dbname = "UserDB";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Database connection
-    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($is_new_user) {
         // Register a new user by hashing the password
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $stmt->bind_param('ss', $username, $password_hash);
 
         if ($stmt->execute()) {
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         // Existing user login
-        $stmt = $conn->prepare("SELECT user_id, password FROM Users WHERE username = ?");
+        $stmt = $conn->prepare("SELECT user_id, password FROM users WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();

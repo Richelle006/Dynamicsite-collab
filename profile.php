@@ -33,7 +33,7 @@ $result_bookings = $stmt_bookings->get_result();
 
 $stmt_bookings->close();
 
-$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -203,3 +203,6 @@ $conn->close();
     <script src="scripts.js"></script>
 </body>
 </html>
+<?php
+$conn->close();
+?>

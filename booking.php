@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
     }
 }
 
-$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -171,3 +171,6 @@ $conn->close();
     <script src="scripts.js"></script>
 </body>
 </html>
+<?php
+$conn->close();
+?>
