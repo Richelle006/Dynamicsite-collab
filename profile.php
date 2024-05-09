@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 
 // Retrieve services from the database
-$sql = "SELECT service_id, service_name FROM services";
+$sql = "SELECT service_id, service_name, price FROM services";
 $result = $conn->query($sql);
 
 $services = [];
@@ -26,10 +26,11 @@ if ($result === false) {
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $services[$row['service_id']] = $row['service_name'];
+        $services[$row['service_id']] = array(
+            'service_name' => $row['service_name'],
+            'price' => $row['price']
+        );
     }
-} else {
-    die("No services found in the database.");
 }
 
 
@@ -152,26 +153,11 @@ $stmt_bookings->close();
                 </tr>
                 <?php while ($row = $result_bookings->fetch_assoc()): ?>
                 <tr>
-                    <td><?php echo isset($services[$row['service_id']]) ? $services[$row['service_id']] : 'Service Not Found'; ?></td>
+                    <td><?php echo isset($services[$row['service_id']]) ? $services[$row['service_id']]['service_name'] : 'Service Not Found'; ?></td>
                     <td><?php echo $row['description']; ?></td>
                     <td><?php echo $row['booking_date']; ?></td>
-                    <!-- <td>
-                        <?php
-                        // Check if the service_id exists in the $services array
-                        if (isset($services[$row['service_id']])) {
-                            // Retrieve the service information
-                            $service_info = $services[$row['service_id']];
-                            // Check if the price attribute exists in the service information
-                            if (isset($service_info['price'])) {
-                                echo $service_info['price'];
-                            } else {
-                                echo 'Price Not Available';
-                            }
-                        } else {
-                            echo 'Service Not Found';
-                        }
-                        ?>
-                    </td> -->
+                    <td><?php echo isset($services[$row['service_id']]) ? $services[$row['service_id']]['price'] : 'Price Not Available'; ?></td>
+                     
                     <td>
                         <a href="edit_booking.php?id=<?php echo $row['booking_id']; ?>">Edit</a>
                         <a href="delete_booking.php?id=<?php echo $row['booking_id']; ?>">Delete</a>

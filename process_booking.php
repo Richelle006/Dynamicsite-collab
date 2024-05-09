@@ -52,9 +52,6 @@ if (isset($_SESSION['user_id'])) {
     // Get user_id from the session 
     $user_id = $_SESSION['user_id'];
 
-// // Retrieve services from the database
-// $sql = "SELECT service_id, service_name, price FROM services";
-// $result = $conn->query($sql);
 
     // Insert into the Bookings table using a prepared statement
     $stmt = $conn->prepare("INSERT INTO bookings (user_id, service_id, booking_date, description) VALUES (?, ?, ?, ?)");

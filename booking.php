@@ -13,13 +13,19 @@ if ($conn->connect_error) {
 }
 
 // Retrieve services from the database
-$sql = "SELECT service_id, service_name FROM services";
+$sql = "SELECT service_id, service_name, price FROM services";
 $result = $conn->query($sql);
 
 $services = [];
 if ($result->num_rows > 0) {
+    // while ($row = $result->fetch_assoc()) {
+    //     $services[$row['service_id']] = $row['service_name'];
+    // }
     while ($row = $result->fetch_assoc()) {
-        $services[$row['service_id']] = $row['service_name'];
+        $services[$row['service_id']] = [
+            'service_name' => $row['service_name'],
+            'price' => $row['price']
+        ];
     }
 }
 
@@ -91,12 +97,11 @@ if ($result->num_rows > 0) {
                   <label for="service-avail">Service to Avail:</label>
                   <select id="service-avail" name="service-avail" required>
                       <option value="">Select a Service</option>
-                      <?php foreach ($services as $service_id => $service_name): ?>
-                          <option value="<?php echo $service_id; ?>"><?php echo $service_name; ?></option>
-                      <?php endforeach; ?>
+                      <?php foreach ($services as $service_id => $service): ?>
+        <option value="<?php echo $service_id; ?>"><?php echo $service['service_name']; ?> - <?php echo $service['price']; ?></option>
+    <?php endforeach; ?>
                   </select>
-                  
-
+                  <br>
                   <label for="event-description">Event Description:</label>
                   <input type="text" id="event-description" name="event-description" placeholder="e.g., Wedding, Birthday" required>
                   <br>
