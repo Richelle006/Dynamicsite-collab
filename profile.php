@@ -1,5 +1,6 @@
 <?php
 session_start();
+$user_id = $_SESSION['user_id'];
 
 // Database connection
 $servername = "localhost";
@@ -12,27 +13,34 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
 // Retrieve services from the database
 $sql = "SELECT service_id, service_name FROM services";
 $result = $conn->query($sql);
 
 $services = [];
+
+if ($result === false) {
+    die("Error executing query: " . $conn->error);
+}
+
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $services[$row['service_id']] = $row['service_name'];
     }
+} else {
+    die("No services found in the database.");
 }
+
 
 // Retrieve user's bookings
 $user_id = $_SESSION['user_id'];
-$sql_bookings = "SELECT * FROM Bookings WHERE user_id = ?";
+$sql_bookings = "SELECT * FROM bookings WHERE user_id = ?";
 $stmt_bookings = $conn->prepare($sql_bookings);
 $stmt_bookings->bind_param('i', $user_id);
 $stmt_bookings->execute();
 $result_bookings = $stmt_bookings->get_result();
-
 $stmt_bookings->close();
-
 
 ?>
 
@@ -147,6 +155,23 @@ $stmt_bookings->close();
                     <td><?php echo isset($services[$row['service_id']]) ? $services[$row['service_id']] : 'Service Not Found'; ?></td>
                     <td><?php echo $row['description']; ?></td>
                     <td><?php echo $row['booking_date']; ?></td>
+                    <!-- <td>
+                        <?php
+                        // Check if the service_id exists in the $services array
+                        if (isset($services[$row['service_id']])) {
+                            // Retrieve the service information
+                            $service_info = $services[$row['service_id']];
+                            // Check if the price attribute exists in the service information
+                            if (isset($service_info['price'])) {
+                                echo $service_info['price'];
+                            } else {
+                                echo 'Price Not Available';
+                            }
+                        } else {
+                            echo 'Service Not Found';
+                        }
+                        ?>
+                    </td> -->
                     <td>
                         <a href="edit_booking.php?id=<?php echo $row['booking_id']; ?>">Edit</a>
                         <a href="delete_booking.php?id=<?php echo $row['booking_id']; ?>">Delete</a>

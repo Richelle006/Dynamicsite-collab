@@ -92,14 +92,11 @@ if ($result->num_rows > 0) {
                   <select id="service-avail" name="service-avail" required>
                       <option value="">Select a Service</option>
                       <?php foreach ($services as $service_id => $service_name): ?>
-                          <option value="<?php echo $service_id; ?>"><?php echo $service_name . " (ID: " . $service_id . ")"; ?></option>
+                          <option value="<?php echo $service_id; ?>"><?php echo $service_name; ?></option>
                       <?php endforeach; ?>
                   </select>
-                  <!-- Debugging output -->
-                  <?php if (isset($_POST['service-avail'])): ?>
-                      <p>Selected service name in form: <?php echo htmlspecialchars($_POST['service-avail']); ?></p>
-                  <?php endif; ?>
-                  <br>
+                  
+
                   <label for="event-description">Event Description:</label>
                   <input type="text" id="event-description" name="event-description" placeholder="e.g., Wedding, Birthday" required>
                   <br>
