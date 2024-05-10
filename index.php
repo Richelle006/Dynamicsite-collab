@@ -133,10 +133,6 @@ session_start();
     </div>
 </section>
 
-
-
-
-
          <!-- "FOOTER" SECTION INDEX -->
          <footer class="footer">
             <div class="footer-hours">

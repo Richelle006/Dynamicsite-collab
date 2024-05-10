@@ -13,7 +13,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 // Retrieve services from the database
 $sql = "SELECT service_id, service_name, price FROM services";
 $result = $conn->query($sql);
@@ -33,7 +32,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-
 // Retrieve user's bookings
 $user_id = $_SESSION['user_id'];
 $sql_bookings = "SELECT * FROM bookings WHERE user_id = ?";
@@ -42,7 +40,6 @@ $stmt_bookings->bind_param('i', $user_id);
 $stmt_bookings->execute();
 $result_bookings = $stmt_bookings->get_result();
 $stmt_bookings->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -96,17 +93,12 @@ $stmt_bookings->close();
     </style>
 </head>
 <body>
-    <!-- Header section -->
     <header>
-        <!-- Header content -->
         <div class="header-content">
             <img src="resources/logo.png" alt="Framed Memories Studio Logo" class="site-logo">
         </div>
-        
-        <!-- Navigation menu -->
         <nav id="navbar">
             <ul>
-                <!-- Navigation links -->
                 <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
                 <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
                 <li class="dropdown">
@@ -119,8 +111,6 @@ $stmt_bookings->close();
                 </li>
                 <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
-
-                <!-- Profile link -->
                 <?php 
                 if (isset($_SESSION['username'])) {
                     $username = htmlspecialchars($_SESSION['username']);
@@ -167,10 +157,8 @@ $stmt_bookings->close();
             </table>
         </div>
     </section>
-    
-    <!-- Footer section -->
+
     <footer class="footer">
-        <!-- Operating Hours -->
         <div class="footer-hours">
             <h3>Operating Hours</h3>
             <p>Monday – Friday: 9am – 5pm</p>
