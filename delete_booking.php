@@ -5,13 +5,11 @@ $username = "root";
 $password = "";
 $dbname = "UserDB";
 
-// Check if user is logged in
+// Check that user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php'); // Redirect to login page if not logged in
+    header('Location: login.php');
     exit();
 }
-
-// Check if booking ID is provided in the URL
 if (!isset($_GET['id'])) {
     echo "Booking ID is missing.";
     exit();
@@ -36,7 +34,6 @@ if ($check_result->num_rows != 1) {
     exit();
 }
 
-// Close statement
 $check_stmt->close();
 
 // Delete the booking from the database

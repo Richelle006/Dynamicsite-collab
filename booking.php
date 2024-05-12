@@ -11,16 +11,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-// Retrieve services from the database
+// Retrieve services from db
 $sql = "SELECT service_id, service_name, price FROM services";
 $result = $conn->query($sql);
 
 $services = [];
 if ($result->num_rows > 0) {
-    // while ($row = $result->fetch_assoc()) {
-    //     $services[$row['service_id']] = $row['service_name'];
-    // }
     while ($row = $result->fetch_assoc()) {
         $services[$row['service_id']] = [
             'service_name' => $row['service_name'],
@@ -28,10 +24,7 @@ if ($result->num_rows > 0) {
         ];
     }
 }
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,19 +55,17 @@ if ($result->num_rows > 0) {
                         <a href="events_workshops.php">Events & Workshops</a>
                     </div>
                 </li>
-                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
+                <li><a href="booking.php"><img src="resources/booking.png"  alt="" class="menu-icon">Booking</a></li>
                 <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
 
-                <!-- Profile link -->
+                <!--Profile-->
                 <?php 
                 if (isset($_SESSION['username'])) {
                     $username = htmlspecialchars($_SESSION['username']);
                     echo "<li><a href='profile.php' class='username'>My Profile: $username</a></li>";
                 } else {
-                    // If the user is not logged in, show a login link instead
                     echo "<li><a href='login.php' class='username'>Login</a></li>";
                 }
-                
                 // Logout link
                 if (isset($_SESSION['username'])) {
                     echo "<li><a href='logout.php'>Logout</a></li>";
@@ -84,10 +75,9 @@ if ($result->num_rows > 0) {
         </nav>
     </header>
     
-    <!-- Booking section -->
+    <!-- Booking-->
     <section id="booking-section">
         <div class="booking-container">
-            <!-- Booking Form -->
           <div class="booking-form">
               <h3>Book Your Session</h3>
               <form method="POST" action="process_booking.php" id="bookingForm">
@@ -105,31 +95,24 @@ if ($result->num_rows > 0) {
                   <label for="event-description">Event Description:</label>
                   <input type="text" id="event-description" name="event-description" placeholder="e.g., Wedding, Birthday" required>
                   <br>
-                  <!-- Keep the button type as 'button' for JavaScript handling -->
                   <button type="button" id="book-now-button">Book Now</button>
               </form>
           </div>
-
-
-            <!-- Booking Details -->
             <div class="booking-details">
                 <h2>BOOK NOW!</h2>
                 <p>Don’t miss out on the moments that matter. Frame your memories in style with our expertly crafted photo sessions. Ready to create timeless memories? Book your session with <b>Framed Memories Studio!</b></p>
             </div>
-
-            <!-- Slideshow Container -->
+            <!--Slideshow-->
             <div class="slideshow-container">
                 <div class="mySlides fade">
                     <img src="resources/20.jpg" alt="Image 1">
                 </div>
-                <!-- Add more slideshow images here -->
             </div>
         </div>
     </section>
     
-    <!-- Footer section -->
+    <!--Footer-->
     <footer class="footer">
-        <!-- Operating Hours -->
         <div class="footer-hours">
             <h3>Operating Hours</h3>
             <p>Monday – Friday: 9am – 5pm</p>
