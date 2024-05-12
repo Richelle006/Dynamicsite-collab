@@ -45,7 +45,45 @@ $stmt_bookings->close();
     <title>User Profile</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        
+        body {
+        font-family: Arial, sans-serif;
+        }
+        .profile-container {
+        margin: 20px auto;
+        max-width: 800px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
+            background-color: rgba(255, 255, 255, 0.5); /* White with 50% opacity */
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2; /* Light gray background for table header */
+        }
+
+        tr:hover {
+            background-color: #ddd; 
+        }
+
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 
 </head>

@@ -10,7 +10,12 @@ session_start();
         <link rel="stylesheet" href="styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
         <style>
-        </head>
+        .service-action {
+        display: flex;
+        justify-content: center;
+        }
+    </style>
+    </head>
 <body>
 
         <header>
