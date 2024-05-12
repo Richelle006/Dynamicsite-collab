@@ -154,8 +154,21 @@ $conn->close();
             <label for="description">Description:</label>
             <input type="text" id="description" name="description" value="<?php echo $row['description']; ?>" required>
             <br>
+<<<<<<< HEAD
             <label for="service-avail">Service to Avail:</label>
                   
+=======
+            <!-- Insert the Service field here -->
+                <label for="service-avail">Service to Avail:</label>
+                <select id="service-avail" name="service-avail" required>
+                    <option value="">Select a Service</option>
+                    <?php foreach ($services as $service_id => $service): ?>
+                        <option value="<?php echo $service_id; ?>"><?php echo $service['service_name']; ?> - <?php echo         $service['price']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <br>
+                <!-- End of Service field -->
+>>>>>>> 9b894837ecb794d17591eb969ee832bd49900bbb
             <button type="submit">Update</button>
         </form>
     </div>
