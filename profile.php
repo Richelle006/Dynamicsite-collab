@@ -12,17 +12,13 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 // Retrieve services from the database
 $sql = "SELECT service_id, service_name, price FROM services";
 $result = $conn->query($sql);
-
 $services = [];
-
 if ($result === false) {
     die("Error executing query: " . $conn->error);
 }
-
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $services[$row['service_id']] = array(
@@ -31,7 +27,6 @@ if ($result->num_rows > 0) {
         );
     }
 }
-
 // Retrieve user's bookings
 $user_id = $_SESSION['user_id'];
 $sql_bookings = "SELECT * FROM bookings WHERE user_id = ?";
@@ -50,47 +45,9 @@ $stmt_bookings->close();
     <title>User Profile</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
         
-        .profile-container {
-            margin: 20px auto;
-            max-width: 800px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
-            background-color: rgba(255, 255, 255, 0.5); /* White with 50% opacity */
-        }
-        
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: #f2f2f2; /* Light gray background for table header */
-        }
-        
-        tr:hover {
-            background-color: #ddd; /* Darker gray background when hovering over a row */
-        }
-        
-        a {
-            color: blue;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
+
 </head>
 <body>
     <header>
@@ -119,7 +76,6 @@ $stmt_bookings->close();
                     // If the user is not logged in, show a login link instead
                     echo "<li><a href='login.php' class='username'>Login</a></li>";
                 }
-                
                 // Logout link
                 if (isset($_SESSION['username'])) {
                     echo "<li><a href='logout.php'>Logout</a></li>";
@@ -128,8 +84,6 @@ $stmt_bookings->close();
             </ul>
         </nav>
     </header>
-    
-    <!-- Profile section -->
     <section id="profile-section">
         <div class="profile-container">
             <h2>My Bookings</h2>
@@ -150,7 +104,15 @@ $stmt_bookings->close();
                      
                     <td>
                         <a href="edit_booking.php?id=<?php echo $row['booking_id']; ?>">Edit</a>
-                        <a href="delete_booking.php?id=<?php echo $row['booking_id']; ?>">Delete</a>
+                        <a href="#" onclick="confirmDelete(<?php echo $row['booking_id']; ?>)">Delete</a>
+
+                        <script>
+                        function confirmDelete(bookingId) {
+                            if (confirm('Are you sure you want to delete this booking?')) {
+                                window.location.href = 'delete_booking.php?id=' + bookingId;
+                            }
+                        }
+                        </script>
                     </td>
                 </tr>
                 <?php endwhile; ?>
@@ -165,8 +127,6 @@ $stmt_bookings->close();
             <p>Saturday: 10am – 4pm</p>
             <p>Sunday: Closed</p>
         </div>
-
-        <!-- Social Media Links -->
         <div class="footer-social">
             <h3>Follow Us</h3>
             <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
@@ -176,8 +136,6 @@ $stmt_bookings->close();
                 <img src="resources/insta.png" alt="Instagram">
             </a>
         </div>
-
-        <!-- Google Map -->
         <div class="footer-map">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13236.892065074411!2d151.12603910928777!3d-33.96110692077346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b9fda64fa8f9%3A0xd1480172c44825ab!2s676%20Princes%20Hwy%2C%20Kogarah%20NSW%202217!5e0!3m2!1sen!2sau!4v1712456775204!5m2!1sen!2sau"
@@ -188,8 +146,6 @@ $stmt_bookings->close();
                 loading="lazy"
             ></iframe>
         </div>
-        
-        <!-- Contact Information -->
         <div class="footer-contact">
             <h3>Contact Us</h3>
             <p><img src="resources/address.png" alt="Address"> 676 Princes Highway, Sydney NSW 2217</p>
@@ -197,8 +153,6 @@ $stmt_bookings->close();
             <p><img src="resources/call.png" alt="Phone"> +123 456 7890</p>
         </div>
     </footer>
-
-    <!-- JavaScript -->
     <script src="scripts.js"></script>
 </body>
 </html>

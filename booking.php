@@ -117,14 +117,25 @@ if ($result->num_rows > 0) {
                 <p>Don’t miss out on the moments that matter. Frame your memories in style with our expertly crafted photo sessions. Ready to create timeless memories? Book your session with <b>Framed Memories Studio!</b></p>
             </div>
 
-            <!-- Slideshow Container -->
+             <!-- Slideshow Container -->
             <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <img src="resources/20.jpg" alt="Image 1">
-                </div>
-                <!-- Add more slideshow images here -->
+            <div class="mySlides fade">
+                <img src="resources/20.jpg" alt="Image 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/19.jpg" alt="Image 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/5.jpg" alt="Image 3">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/6.jpg" alt="Image 4">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/4.jpg" alt="Image 5">
             </div>
         </div>
+  </div>
     </section>
     
     <!-- Footer section -->

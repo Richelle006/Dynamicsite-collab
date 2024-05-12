@@ -29,10 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $username; // Set session variable
             $user_id = $conn->insert_id;
             $_SESSION['user_id'] = $user_id;
-                                    // Session debugging statement
-                            echo "Session variables set: ";
-                            var_dump($_SESSION);
-
+    
             // Redirect the user to the appropriate page
             header('Location: index.php');
             exit();
@@ -53,10 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Verify the entered password against the stored hash
             if (password_verify($password, $stored_password)) {
-                $_SESSION['username'] = $username; // Set session variable
-                $_SESSION['user_id'] = $user_id;   // Set session variable
-
-                // Redirect the user to the appropriate page
+                $_SESSION['username'] = $username; 
+                $_SESSION['user_id'] = $user_id;   
                 header('Location: index.php');
                 exit();
             } else {

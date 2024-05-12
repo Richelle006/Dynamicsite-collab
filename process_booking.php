@@ -24,22 +24,16 @@ function getServiceId($conn, $service_name) {
 
     // Check if the query returned any rows
     if ($result->num_rows > 0) {
-        // Fetch the row
         $row = $result->fetch_assoc();
-
-        // Return the value of 'service_id'
         return $row['service_id'];
     } else {
         return null;
     }
 }
-
-
 // Retrieve data from the form via POST
 $booking_date = $_POST['booking-date'];
 $service_id = $_POST['service-avail'];
 $description = $_POST['event-description'];
-
 
 // Validate inputs
 if (empty($booking_date) || empty($service_id) || empty($description)) {
@@ -49,15 +43,11 @@ if (empty($booking_date) || empty($service_id) || empty($description)) {
 
 // Check if $_SESSION['user_id'] is set before accessing it
 if (isset($_SESSION['user_id'])) {
-    // Get user_id from the session 
     $user_id = $_SESSION['user_id'];
 
-
-    // Insert into the Bookings table using a prepared statement
+    // Insert into the Bookings table
     $stmt = $conn->prepare("INSERT INTO bookings (user_id, service_id, booking_date, description) VALUES (?, ?, ?, ?)");
     $stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
-
-    // Execute and provide feedback
     try {
         if ($stmt->execute()) {
             echo "Booking successfully created!";
@@ -75,6 +65,5 @@ if (isset($_SESSION['user_id'])) {
     echo "User ID is not set. Please log in first.";
 }
 
-// Close the database connection
 $conn->close();
 ?>

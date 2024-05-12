@@ -9,7 +9,8 @@ session_start();
         <title>Homepage</title>
         <link rel="stylesheet" href="styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    </head>
+        <style>
+        </head>
 <body>
 
         <header>
@@ -52,10 +53,6 @@ session_start();
                 </ul>
             </nav>
         </header>
-
-
-
-  <!--  "SERVICES" SECTION INDEX-->
   <section id="services-intro">
     <div class="container">
         <h2 class="section-title">Services</h2>
@@ -64,43 +61,66 @@ session_start();
 </section>
 
 <section id="services" class="services">
-    <!-- Service 1 -->
     <div class="service">
         <h3>PHOTO STUDIO</h3>
         <img src="resources/18.jpg" alt="Photo Studio">
         <p>Our Photo Studio is equipped with state-of-the-art lighting and a spacious cyclorama, ideal for all kinds of photography projects.</p>
         <div class="service-action">
-            <a href="photo_studio.html" class="more-link">More >>></a>
-            <button onclick="location.href='booking.html#photostudio';">Book Studio</button>
+            <button onclick="redirectToGallery()">View Gallery</button>
+            <button onclick="redirectToBookingPage()">Book Studio</button>
         </div>
     </div>
-    <!-- Service 2 -->
+
+<script>
+function redirectToGallery() {
+    window.location.href = 'gallery.php';
+}
+
+function redirectToBookingPage() {
+    window.location.href = 'booking.php#photostudio';
+}
+</script>
+    </div>
     <div class="service">
         <h3>CUSTOMIZED FRAME </h3>
         <img src="resources/4.jpg" alt="Customized Frame">
         <p>Enhance the beauty of your portraits with our bespoke framing services, offering a variety of styles and materials.</p>
         <div class="service-action">
-            <a href="customized_frame.html" class="more-link">More >>></a>
-            <button onclick="location.href='booking.html#customizedframe';">Custom Frames</button>
-        </div>
+        <button onclick="redirectToFrames()">View Frames</button>
+        <button onclick="redirectToBookingPage()">Book Studio</button>
     </div>
 
-    <!-- Service 3 -->
+<script>
+    function redirectToFrames() {
+        window.location.href = 'frames.php';
+    }
+
+    function redirectToBookingPage() {
+        window.location.href = 'booking.php#photostudio';
+    }
+</script>
+</div>
     <div class="service">
         <h3>EVENTS & WORKSHOPS </h3>
         <img src="resources/20.jpg" alt="Events & Workshops">
         <p>Join our workshops or host your event in a creative setting, perfect for learning, celebrating events, and networking.</p>
         <div class="service-action">
-        <a href="events_workshops.html"class="more-link">More >>></a>
-        <button onclick="location.href='booking.html#joinnow';">Join Now</button>
+        <button onclick="redirectToEvents()">View Events</button>
+        <button onclick="redirectToBookingPage()">Book Studio</button>
     </div>
+
+<script>
+    function redirectToEvents() {
+        window.location.href = 'event.php';
+    }
+
+    function redirectToBookingPage() {
+        window.location.href = 'booking.php#photostudio';
+    }
+</script>
+</div>
 </section>
 
-
-
-
-        
-       <!-- "FOOTER" SECTION INDEX -->
          <footer class="footer">
             <div class="footer-hours">
                 <h3>Operating Hours</h3>
