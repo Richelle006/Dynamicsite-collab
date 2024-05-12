@@ -58,8 +58,8 @@ $stmt_bookings->close();
             border-collapse: collapse;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
-            background-color: rgba(255, 255, 255, 0.5); /* White with 50% opacity */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.5); 
         }
 
         th, td {
@@ -69,7 +69,7 @@ $stmt_bookings->close();
         }
 
         th {
-            background-color: #f2f2f2; /* Light gray background for table header */
+            background-color: #f2f2f2; 
         }
 
         tr:hover {
