@@ -20,20 +20,19 @@ session_start();
              
             <nav id="navbar">
                 <ul>
-                    <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
-                    <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
+                    <li><a href="index.php"><img src="resources/home-button.png" alt="Home Icon" class="menu-icon">Home</a></li>
+                    <li><a href="about.php"><img src="resources/about us.png" alt="About Us Icon" class="menu-icon">About Us</a></li>
                     <li class="dropdown">
-                        <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
+                        <a href="services.php"><img src="resources/services.png" alt="Services Icon" class="menu-icon">Services</a>
                         <div class="dropdown-content">
                             <a href="photo_studio.php">Photo Studio</a>
                             <a href="customized_frame.php">Customized Frame</a>
                             <a href="events_workshops.php">Events & Workshops</a>
                         </div>
                     </li>
-    
-                    <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                    <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
-               
+                    <li><a href="booking.php"><img src="resources/booking.png" alt="Booking Icon" class="menu-icon">Booking</a></li>
+                    <li><a href="contact.php"><img src="resources/contact us.png" alt="Contact Us Icon" class="menu-icon">Contact</a></li>
+
                     <?php 
                     if (isset($_SESSION['username'])) {
                         $username = htmlspecialchars($_SESSION['username']);
