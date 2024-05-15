@@ -9,6 +9,12 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .service-action {
+        display: flex;
+        justify-content: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -17,18 +23,18 @@ session_start();
         </div>
         <nav id="navbar">
             <ul>
-                <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
-                <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
-                <li class="dropdown">
-                    <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
-                    <div class="dropdown-content">
-                        <a href="photo_studio.php">Photo Studio</a>
-                        <a href="customized_frame.php">Customized Frame</a>
-                        <a href="events_workshops.php">Events & Workshops</a>
-                    </div>
-                </li>
-                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
+                <li><a href="index.php"><img src="resources/home-button.png" alt="Home Icon" class="menu-icon">Home</a></li>
+                    <li><a href="about.php"><img src="resources/about us.png" alt="About Us Icon" class="menu-icon">About Us</a></li>
+                    <li class="dropdown">
+                        <a href="services.php"><img src="resources/services.png" alt="Services Icon" class="menu-icon">Services</a>
+                        <div class="dropdown-content">
+                            <a href="photo_studio.php">Photo Studio</a>
+                            <a href="customized_frame.php">Customized Frame</a>
+                            <a href="events_workshops.php">Events & Workshops</a>
+                        </div>
+                    </li>
+                    <li><a href="booking.php"><img src="resources/booking.png" alt="Booking Icon" class="menu-icon">Booking</a></li>
+                    <li><a href="contact.php"><img src="resources/contact us.png" alt="Contact Us Icon" class="menu-icon">Contact</a></li>
 
                 <?php if (isset($_SESSION['username'])): ?>
                     <li><span class="username">Logged in as: <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
@@ -53,15 +59,9 @@ session_start();
         <div class="about-overlay">
             <h2>About Us</h2>
             <p>Nestled in the heart of creativity, our studio is more than just a photography service—it's a sanctuary where precious moments are captured, cherished, and transformed into timeless keepsakes.</p>
-            <a href="about.html" class="read-more">read more...</a>
+            <a href="about.php" class="read-more">read more...</a>
         </div>
     </section>
-  
-
-
-
-    
-          <!--  "SERVICES" SECTION INDEX-->
 <section id="services-intro">
     <div class="container">
         <h2 class="section-title">Services</h2>
@@ -69,42 +69,66 @@ session_start();
     </div>
 </section>
 
-<section id="services" class="services">
-    <!-- Service 1 -->
-    <div class="service">
-        <h3>PHOTO STUDIO</h3>
-        <img src="resources/18.jpg" alt="Photo Studio">
-        <p>Our Photo Studio is equipped with state-of-the-art lighting and a spacious cyclorama, ideal for all kinds of photography projects.</p>
-        <div class="service-action">
-            <a href="photo_studio.html" class="more-link">More >>></a>
-            <button onclick="location.href='booking.html#photostudio';">Book Studio</button>
+        <section id="services" class="services">
+        <div class="service">
+                <h3>PHOTO STUDIO</h3>
+                <img src="resources/18.jpg" alt="Photo Studio">
+                <p>Our Photo Studio is equipped with state-of-the-art lighting and a spacious cyclorama, ideal for all kinds of photography projects.</p>
+                <div class="service-action">
+                    <button onclick="redirectToGallery()">View Gallery</button>
+                    <button onclick="redirectToBookingPage()">Book Studio</button>
+                </div>
+            </div>
+
+        <script>
+        function redirectToGallery() {
+            window.location.href = 'gallery.php';
+        }
+
+        function redirectToBookingPage() {
+            window.location.href = 'booking.php#photostudio';
+        }
+        </script>
+            </div>
+            <div class="service">
+                <h3>CUSTOMIZED FRAME </h3>
+                <img src="resources/4.jpg" alt="Customized Frame">
+                <p>Enhance the beauty of your portraits with our bespoke framing services, offering a variety of styles and materials.</p>
+                <div class="service-action">
+                <button onclick="redirectToFrames()">View Frames</button>
+                <button onclick="redirectToBookingPage()">Book Studio</button>
+            </div>
+
+        <script>
+            function redirectToFrames() {
+                window.location.href = 'frames.php';
+            }
+
+            function redirectToBookingPage() {
+                window.location.href = 'booking.php#photostudio';
+            }
+        </script>
         </div>
-    </div>
-    <!-- Service 2 -->
-    <div class="service">
-        <h3>CUSTOMIZED FRAME </h3>
-        <img src="resources/4.jpg" alt="Customized Frame">
-        <p>Enhance the beauty of your portraits with our bespoke framing services, offering a variety of styles and materials.</p>
-        <div class="service-action">
-            <a href="customized_frame.html" class="more-link">More >>></a>
-            <button onclick="location.href='booking.html#customizedframe';">Custom Frames</button>
+            <div class="service">
+                <h3>EVENTS & WORKSHOPS </h3>
+                <img src="resources/20.jpg" alt="Events & Workshops">
+                <p>Join our workshops or host your event in a creative setting, perfect for learning, celebrating events, and networking.</p>
+                <div class="service-action">
+                <button onclick="redirectToEvents()">View Events</button>
+                <button onclick="redirectToBookingPage()">Book Studio</button>
+            </div>
+
+        <script>
+            function redirectToEvents() {
+                window.location.href = 'event.php';
+            }
+
+            function redirectToBookingPage() {
+                window.location.href = 'booking.php#photostudio';
+            }
+        </script>
         </div>
-    </div>
-
-    <!-- Service 3 -->
-    <div class="service">
-        <h3>EVENTS & WORKSHOPS </h3>
-        <img src="resources/20.jpg" alt="Events & Workshops">
-        <p>Join our workshops or host your event in a creative setting, perfect for learning, celebrating events, and networking.</p>
-        <div class="service-action">
-        <a href="events_workshops.html"class="more-link">More >>></a>
-        <button onclick="location.href='booking.html#joinnow';">Join Now</button>
-    </div>
-</section>
-
-
-
-
+        </section>
             <!-- "CONTACT" SECTION INDEX -->
 <section id="contact">
     <div class="container contact-container">
