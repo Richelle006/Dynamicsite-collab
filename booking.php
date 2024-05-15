@@ -1,5 +1,5 @@
 <?php
-session_start();
+ session_start();
 
 // Database connection
 $servername = "localhost";
@@ -7,14 +7,13 @@ $username = "root";
 $password = "";
 $dbname = "UserDB";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+ $conn = new mysqli($servername, $username, $password, $dbname);
+ if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+ }
 // Retrieve services from db
 $sql = "SELECT service_id, service_name, price FROM services";
 $result = $conn->query($sql);
-
 $services = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -85,10 +84,12 @@ if ($result->num_rows > 0) {
                   <br>
                   <label for="service-avail">Service to Avail:</label>
                   <select id="service-avail" name="service-avail" required>
-                      <option value="">Select a Service</option>
-                      <?php foreach ($services as $service_id => $service): ?>
-        <option value="<?php echo $service_id; ?>"><?php echo $service['service_name']; ?> - <?php echo $service['price']; ?></option>
-    <?php endforeach; ?>
+                        <option value="">Select a Service</option>
+                        <?php foreach ($services as $service_id => $service): ?>
+                        <option value="<?php echo $service_id; ?>">
+                        <?php echo $service['service_name']; ?> 
+                        <?php echo $service['price']; ?></option>
+                        <?php endforeach; ?>
                   </select>
                   <br>
                   <label for="event-description">Event Description:</label>

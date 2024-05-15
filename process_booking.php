@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Database connection credentials
+// Database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -9,8 +9,6 @@ $dbname = "UserDB";
 
 // Establish the database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check if the connection was successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -46,7 +44,8 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
     // Insert into the Bookings table
-    $stmt = $conn->prepare("INSERT INTO bookings (user_id, service_id, booking_date, description) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO bookings (user_id, service_id, 
+        booking_date, description) VALUES (?, ?, ?, ?)");
     $stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
     try {
         if ($stmt->execute()) {
