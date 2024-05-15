@@ -94,7 +94,6 @@ $stmt_bookings->close();
         </div>
         <nav id="navbar">
             <ul>
-                <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
                 <li><a href="index.php"><img src="resources/home-button.png" alt="Home Icon" class="menu-icon">Home</a></li>
                 <li><a href="about.php"><img src="resources/about us.png" alt="About Us Icon" class="menu-icon">About Us</a></li>
                 <li class="dropdown">

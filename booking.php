@@ -103,12 +103,24 @@ if ($result->num_rows > 0) {
             </div>
             <!--Slideshow-->
             <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <img src="resources/20.jpg" alt="Image 1">
-                </div>
+            <div class="mySlides fade">
+                <img src="resources/20.jpg" alt="Event Photo 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/19.jpg" alt="Event Photo 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/5.jpg" alt="Event Photo 3">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/6.jpg" alt="Event Photo 4">
+            </div>
+            <div class="mySlides fade">
+                <img src="resources/4.jpg" alt="Event Photo 5">
+            </div>
             </div>
         </div>
-    </section>
+        </section>
     
     <!--Footer-->
     <footer class="footer">
@@ -118,46 +130,6 @@ if ($result->num_rows > 0) {
             <p>Saturday: 10am – 4pm</p>
             <p>Sunday: Closed</p>
         </div>
-
-    <!-- Booking Details -->
-    <div class="booking-details">
-      <h2>BOOK NOW!</h2>
-      <p>Don’t miss out on the moments that matter. Frame your memories in style with our expertly crafted photo sessions. Ready to create timeless memories? Book your session with <b>Framed Memories Studio!</b></p>
-    </div>
-
-    <!-- Slideshow Container -->
-    <div class="slideshow-container">
-      <div class="mySlides fade">
-        <img src="resources/20.jpg" alt="Event Photo 1">
-      </div>
-      <div class="mySlides fade">
-        <img src="resources/19.jpg" alt="Event Photo 2">
-      </div>
-      <div class="mySlides fade">
-        <img src="resources/5.jpg" alt="Event Photo 3">
-      </div>
-      <div class="mySlides fade">
-        <img src="resources/6.jpg" alt="Event Photo 4">
-      </div>
-      <div class="mySlides fade">
-        <img src="resources/4.jpg" alt="Event Photo 5">
-      </div>
-    </div>
-  </div>
-</section>
-        
-        
-        
-
-
-    <!-- "FOOTER" SECTION -->
-   <footer class="footer">
-    <div class="footer-hours">
-        <h3>Operating Hours</h3>
-        <p>Monday – Friday: 9am – 5pm</p>
-        <p>Saturday: 10am – 4pm</p>
-        <p>Sunday: Closed</p>
-    </div>
 
     <div class="footer-social">
         <h3>Follow Us</h3>
