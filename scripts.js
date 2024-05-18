@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 });
 
-//Document to validate the Contact-Us button, making sure all fields have inputs
-//and not blank and that is correct in format
+//CONTACT US (Validate Form)
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
 
@@ -21,22 +21,65 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prevent the default form submission
         event.preventDefault();
 
-        // Check if the form fields are valid (this function should contain your validation logic)
         if (validateForm()) {
-            // If valid, show an alert box
             alert('Thank you for your inquiry. Your message has been submitted.');
-            // upon validation, it will reset the form
             form.reset();
         } else {
-            // If not valid, show an error message
             alert('Please fill out all required fields correctly.');
         }
     });
 });
 
 function validateForm() {
-    return true; 
+    let isValid = true;
+
+    // Required fields
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+
+    if (!name.value.trim()) {
+        isValid = false;
+        alert('Name is required');
+    } else if (!/^[a-zA-Z-' ]*$/.test(name.value.trim())) {
+        isValid = false;
+        alert('Name can only contain letters and white space');
+    }
+
+    if (!email.value.trim()) {
+        isValid = false;
+        alert('Email is required');
+    } else if (!validateEmail(email.value.trim())) {
+        isValid = false;
+        alert('Invalid email format');
+    }
+
+    if (!subject.value.trim()) {
+        isValid = false;
+        alert('Subject is required');
+    }
+
+    if (!message.value.trim()) {
+        isValid = false;
+        alert('Message is required');
+    }
+
+    // Custom validation (example)
+    if (message.value.length < 10) {
+        isValid = false;
+        alert('Message should be at least 10 characters long');
+    }
+
+    return isValid;
 }
+
+function validateEmail(email) {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(email);
+}
+
+
 
 
 

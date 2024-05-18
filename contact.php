@@ -52,33 +52,33 @@ session_start();
 
     
 
-   <!-- "CONTACT" SECTION Page -->
-   <section id="contact">
-    <div class="container contact-container">
-        <div class="contact-info">
-            <h2>Get in touch.</h2>
-            <p>We offer multi-day discounts, event space, workshops, and customizable package bundles. Just drop us a message to get the convo started.</p>
-            <form id="contact-form">
-                <label for="name">Name (required)</label>
-                <input type="text" id="name" name="name" placeholder="First Name" required>
-                <input type="text" name="surname" placeholder="Last Name">
-                
-                <label for="email">Email (required)</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="subject">Subject (required)</label>
-                <input type="text" id="subject" name="subject" required>
-                
-                <label for="message">Message (required)</label>
-                <textarea id="message" name="message" required></textarea>
-                <button type="submit" >Submit</button>
-            </form>
-        </div>
-        <div class="contact-image">
-            <img src="resources/2.jpg" alt="Contact Us Photo">
-        </div>
-    </div>
-</section>
+                <!-- "CONTACT" SECTION Page -->
+                <section id="contact">
+                    <div class="container contact-container">
+                        <div class="contact-info">
+                            <h2>Get in touch.</h2>
+                            <p>We offer multi-day discounts, event space, workshops, and customizable package bundles. Just drop us a message to get the convo started.</p>
+                            <form id="contact-form">
+                                <label for="name">Name (required)</label>
+                                <input type="text" id="name" name="name" placeholder="First Name" required>
+                                <input type="text" name="surname" placeholder="Last Name">
+                                
+                                <label for="email">Email (required)</label>
+                                <input type="email" id="email" name="email" required>
+                                
+                                <label for="subject">Subject (required)</label>
+                                <input type="text" id="subject" name="subject" required>
+                                
+                                <label for="message">Message (required)</label>
+                                <textarea id="message" name="message" required></textarea>
+                                <button type="submit">Submit</button>
+                            </form>
+                        </div>
+                        <div class="contact-image">
+                            <img src="resources/2.jpg" alt="Contact Us Photo">
+                        </div>
+                    </div>
+                </section>
 
 
          <!-- "FOOTER" SECTION Page-->
