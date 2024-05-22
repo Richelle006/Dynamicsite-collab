@@ -127,6 +127,13 @@ $stmt_bookings->close();
     <section id="profile-section">
         <div class="profile-container">
             <h2>My Bookings</h2>
+            <?php
+            if (isset($_COOKIE["last_booking"])) {
+                echo "<p>Welcome back, " . htmlspecialchars($_SESSION['username']) .
+                 "! Your last booking was on: " . 
+                 htmlspecialchars($_COOKIE["last_booking"]) . "</p>";
+            }
+            ?>
             <table>
                 <tr>
                     <th>Service</th>

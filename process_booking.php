@@ -49,6 +49,9 @@ if (isset($_SESSION['user_id'])) {
     $stmt->bind_param('iiss', $user_id, $service_id, $booking_date, $description);
     try {
         if ($stmt->execute()) {
+             //Set a cookie to welcome the user back
+             setcookie("last_booking", $booking_date,
+                time() + (86400 * 30), "/");
             echo "Booking successfully created!";
         } else {
             throw new Exception("Error creating booking: " . $stmt->error);
