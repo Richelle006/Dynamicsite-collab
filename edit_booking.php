@@ -39,18 +39,24 @@ if ($result->num_rows == 1) {
     exit();
 }
 
-// Close statement
 $stmt->close();
+// Fetch services available from the database
+$services = array();
+$services_query = $conn->query("SELECT * FROM Services");
+while ($service_row = $services_query->fetch_assoc()) {
+    $services[$service_row['service_id']] = $service_row;
+}
+
 
 // Handle form submission for editing booking
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Handle form submission to update booking details
     $new_booking_date = $_POST['booking_date'];
     $new_description = $_POST['description'];
-
+    $new_service_id = $_POST['service-avail']; 
     // Update booking details in the database
-    $update_stmt = $conn->prepare("UPDATE Bookings SET booking_date = ?, description = ? WHERE booking_id = ?");
-    $update_stmt->bind_param('ssi', $new_booking_date, $new_description, $booking_id);
+    $update_stmt = $conn->prepare("UPDATE Bookings SET booking_date = ?, description = ?, service_id = ? WHERE booking_id = ?");
+    $update_stmt->bind_param('ssii', $new_booking_date, $new_description, $new_service_id, $booking_id);
 
     if ($update_stmt->execute()) {
         // Booking updated successfully
@@ -104,7 +110,8 @@ $conn->close();
         }
         
         input[type="date"],
-        input[type="text"] {
+        input[type="text"],
+        select {
             width: 100%;
             padding: 8px;
             margin-bottom: 16px;
@@ -132,13 +139,22 @@ $conn->close();
 <body>
     <div class="edit-booking-page">
         <h2>Edit Booking</h2>
-        <form method="POST">
+        <form method="POST" onsubmit="return confirm('Are you sure you want to update this booking?');">
+            <select id="service-avail" name="service-avail" required>
+                <option value="">Select a Service</option>
+                <?php foreach ($services as $service_id => $service): ?>
+                <option value="<?php echo $service_id; ?>"><?php echo $service['service_name']; ?> 
+                <?php echo $service['price']; ?>
+            </option>
+                <?php endforeach; ?>
+            </select>
+            <br>
             <label for="booking_date">Booking Date:</label>
             <input type="date" id="booking_date" name="booking_date" value="<?php echo $row['booking_date']; ?>" required>
             <br>
             <label for="description">Description:</label>
             <input type="text" id="description" name="description" value="<?php echo $row['description']; ?>" required>
-            <br>
+            
             <button type="submit">Update</button>
         </form>
     </div>

@@ -17,18 +17,18 @@ session_start();
         </div>
         <nav id="navbar">
             <ul>
-                <li><a href="index.php"><img src="resources/home-button.png" alt="" class="menu-icon">Home</a></li>
-                <li><a href="about.php"><img src="resources/about us.png" alt="" class="menu-icon">About Us</a></li>
+                <li><a href="index.php"><img src="resources/home-button.png" alt="Home Icon" class="menu-icon">Home</a></li>
+                <li><a href="about.php"><img src="resources/about us.png" alt="About Us Icon" class="menu-icon">About Us</a></li>
                 <li class="dropdown">
-                    <a href="services.php"><img src="resources/services.png" alt="" class="menu-icon">Services</a>
+                    <a href="services.php"><img src="resources/services.png" alt="Services Icon" class="menu-icon">Services</a>
                     <div class="dropdown-content">
                         <a href="photo_studio.php">Photo Studio</a>
                         <a href="customized_frame.php">Customized Frame</a>
                         <a href="events_workshops.php">Events & Workshops</a>
                     </div>
                 </li>
-                <li><a href="booking.php"><img src="resources/booking.png" alt="" class="menu-icon">Booking</a></li>
-                <li><a href="contact.php"><img src="resources/contact us.png" alt="" class="menu-icon">Contact</a></li>
+                <li><a href="booking.php"><img src="resources/booking.png" alt="Booking Icon" class="menu-icon">Booking</a></li>
+                <li><a href="contact.php"><img src="resources/contact us.png" alt="Contact Us Icon" class="menu-icon">Contact</a></li>
 
                 <?php 
                     if (isset($_SESSION['username'])) {
@@ -52,33 +52,33 @@ session_start();
 
     
 
-   <!-- "CONTACT" SECTION Page -->
-   <section id="contact">
-    <div class="container contact-container">
-        <div class="contact-info">
-            <h2>Get in touch.</h2>
-            <p>We offer multi-day discounts, event space, workshops, and customizable package bundles. Just drop us a message to get the convo started.</p>
-            <form id="contact-form">
-                <label for="name">Name (required)</label>
-                <input type="text" id="name" name="name" placeholder="First Name" required>
-                <input type="text" name="surname" placeholder="Last Name">
-                
-                <label for="email">Email (required)</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="subject">Subject (required)</label>
-                <input type="text" id="subject" name="subject" required>
-                
-                <label for="message">Message (required)</label>
-                <textarea id="message" name="message" required></textarea>
-                <button type="submit" >Submit</button>
-            </form>
-        </div>
-        <div class="contact-image">
-            <img src="resources/2.jpg" alt="Contact Us">
-        </div>
-    </div>
-</section>
+                <!-- "CONTACT" SECTION Page -->
+                <section id="contact">
+                    <div class="container contact-container">
+                        <div class="contact-info">
+                            <h2>Get in touch.</h2>
+                            <p>We offer multi-day discounts, event space, workshops, and customizable package bundles. Just drop us a message to get the convo started.</p>
+                            <form id="contact-form">
+                                <label for="name">Name (required)</label>
+                                <input type="text" id="name" name="name" placeholder="First Name" required>
+                                <input type="text" name="surname" placeholder="Last Name">
+                                
+                                <label for="email">Email (required)</label>
+                                <input type="email" id="email" name="email" required>
+                                
+                                <label for="subject">Subject (required)</label>
+                                <input type="text" id="subject" name="subject" required>
+                                
+                                <label for="message">Message (required)</label>
+                                <textarea id="message" name="message" required></textarea>
+                                <button type="submit">Submit</button>
+                            </form>
+                        </div>
+                        <div class="contact-image">
+                            <img src="resources/2.jpg" alt="Contact Us Photo">
+                        </div>
+                    </div>
+                </section>
 
 
          <!-- "FOOTER" SECTION Page-->

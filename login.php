@@ -2,13 +2,13 @@
 session_start();
 $message = '';
 $servername = "localhost";
-$db_username = "root";
-$db_password = "";
+$username = "root";
+$password = "";
 $dbname = "UserDB";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Database connection
-    $conn = new mysqli($servername, $db_username, $db_password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -22,19 +22,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($is_new_user) {
         // Register a new user by hashing the password
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $stmt->bind_param('ss', $username, $password_hash);
 
         if ($stmt->execute()) {
             $_SESSION['username'] = $username; // Set session variable
-            header('Location: index.php');     // Redirect to the homepage
+            $user_id = $conn->insert_id;
+            $_SESSION['user_id'] = $user_id;
+    
+            // Redirect the user to the appropriate page
+            header('Location: index.php');
             exit();
         } else {
             $message = 'Error registering user.';
         }
     } else {
         // Existing user login
-        $stmt = $conn->prepare("SELECT user_id, password FROM Users WHERE username = ?");
+        $stmt = $conn->prepare("SELECT user_id, password FROM users WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -46,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Verify the entered password against the stored hash
             if (password_verify($password, $stored_password)) {
-                $_SESSION['username'] = $username; // Set session variable
-                $_SESSION['user_id'] = $user_id; // Set session variable
-                header('Location: index.php');    // Redirect to the homepage
+                $_SESSION['username'] = $username; 
+                $_SESSION['user_id'] = $user_id;   
+                header('Location: index.php');
                 exit();
             } else {
                 $message = 'Incorrect password.';
@@ -56,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $message = 'User not found.';
         }
+    }
 
     $stmt->close();
     $conn->close();
-    }
 }
 ?>
 
