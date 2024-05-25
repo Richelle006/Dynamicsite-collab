@@ -126,14 +126,15 @@ $stmt_bookings->close();
     </header>
     <section id="profile-section">
         <div class="profile-container">
-            <h2>My Bookings</h2>
-            <?php
-            if (isset($_COOKIE["last_booking"])) {
-                echo "<p>Welcome back, " . htmlspecialchars($_SESSION['username']) .
-                 "! Your last booking was on: " . 
-                 htmlspecialchars($_COOKIE["last_booking"]) . "</p>";
+        <?php
+            if (isset($_COOKIE["last_login_time"])) {
+                echo "<p>Last login time: " . htmlspecialchars($_COOKIE["last_login_time"]) . "</p>";
+            }
+            if (isset($_COOKIE["login_time"])) {
+                echo "<p>Current login time: " . htmlspecialchars($_COOKIE["login_time"]) . "</p>";
             }
             ?>
+            <h2>My Bookings</h2>
             <table>
                 <tr>
                     <th>Service</th>

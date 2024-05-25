@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $username; // Set session variable
             $user_id = $conn->insert_id;
             $_SESSION['user_id'] = $user_id;
+
+             // Set a cookie for the login time
+             setcookie("login_time", date("Y-m-d H:i:s"), time() + (86400 * 30), "/"); // 30 days expiry
+
     
             // Redirect the user to the appropriate page
             header('Location: index.php');
@@ -52,6 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($password, $stored_password)) {
                 $_SESSION['username'] = $username; 
                 $_SESSION['user_id'] = $user_id;   
+                 // Set the last login time cookie
+                 if (isset($_COOKIE["login_time"])) {
+                    setcookie("last_login_time", $_COOKIE["login_time"], time() + (86400 * 30), "/");
+                }
+
+                // Set the current login time cookie
+                setcookie("login_time", date("Y-m-d H:i:s"), time() + (86400 * 30), "/"); // 30 days expiry
+
                 header('Location: index.php');
                 exit();
             } else {
